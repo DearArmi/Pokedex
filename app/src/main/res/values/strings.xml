@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MyPokedex</string>
+    <string name="kanto">Kanto</string>
+    <string name="johto">Johto</string>
+    <string name="hoenn">Hoenn</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+</resources>

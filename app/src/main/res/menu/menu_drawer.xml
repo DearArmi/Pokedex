@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/kanto_option"
+            android:icon="@drawable/ic_baseline_catching_pokemon_24"
+            android:title="@string/kanto"/>
+        <item
+            android:id="@+id/jotho_option"
+            android:icon="@drawable/ic_baseline_catching_pokemon_24"
+            android:title="@string/johto"/>
+        <item
+            android:id="@+id/hoenn_option"
+            android:icon="@drawable/ic_baseline_catching_pokemon_24"
+            android:title="@string/hoenn"/>
+    </group>
+
+
+</menu>
