@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -47,28 +48,16 @@ class PokemonAdapter: ListAdapter<Pokemon, PokemonAdapter.ViewHolder>(Diffcallba
             binding.pokemonNumber.text = pokemon.number.toString()
             binding.pokemonName.text = pokemon.name
 
+            if(pokemon.types.size >1){
 
-            val imageId1:Int = when(pokemon.types[0]){
-                "electric" -> R.drawable.electric
-                "water" -> R.drawable.water
-                else -> 0
+                binding.pokemonTypes.setImageResource(oneOrTwoTypes(pokemon.types)[0])
+                binding.pokemonTypes2.setImageResource(oneOrTwoTypes(pokemon.types)[1])
+            }else{
+
+                binding.pokemonTypes.setImageResource(oneOrTwoTypes(pokemon.types)[0])
+                binding.pokemonTypes2.visibility = View.INVISIBLE
+
             }
-            binding.pokemonTypes.setImageResource(imageId1)
-
-            var imageId2 = 0
-
-            if (pokemon.types.size > 0){
-
-                imageId2 = when(pokemon.types[1]){
-
-                    "electric" -> R.drawable.electric
-                    "water" -> R.drawable.water
-                    else -> 0
-                }
-                binding.pokemonTypes2.setImageResource(imageId2)
-                binding.pokemonTypes2.visibility = View.VISIBLE
-            }
-
 
             binding.executePendingBindings()
 
@@ -83,6 +72,22 @@ class PokemonAdapter: ListAdapter<Pokemon, PokemonAdapter.ViewHolder>(Diffcallba
 
             }*/
         }
+        //Assigning pokemon image type depending on how many types that pokemon has
+        private fun oneOrTwoTypes(listTypes:List<String>):MutableList<Int>{
 
+            val imageListId = mutableListOf<Int>(0,0)
+            var i = 0
+            while (i < listTypes.size){
+
+                imageListId[i] = when(listTypes[i]){
+                    "electric" -> R.drawable.electric
+                    "water" -> R.drawable.water
+                    else -> 0
+
+                }
+                i++
+            }
+            return imageListId
+        }
     }
 }

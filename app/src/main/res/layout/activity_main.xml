@@ -15,19 +15,20 @@
         android:fitsSystemWindows="true"
         tools:context=".MainActivity">
 
-
         <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/pokemon_recycler_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:listitem="@layout/pokemon_list"
-                tools:itemCount="10" />
+                tools:itemCount="5"
+                tools:listitem="@layout/pokemon_list"/>
 
         </FrameLayout>
+
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"
