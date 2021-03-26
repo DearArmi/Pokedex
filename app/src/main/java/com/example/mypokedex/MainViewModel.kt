@@ -4,8 +4,10 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.mypokedex.MainRepository
 import com.example.mypokedex.Pokemon
+import kotlinx.coroutines.launch
 
 
 class MainViewModel(application: Application): AndroidViewModel(application) {
@@ -18,14 +20,18 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         get() = _pokemonList
 
     init {
-        loadPokemon()
+        loadPokemons()
     }
 
-    fun loadPokemon() {
-        _pokemonList.value = repository.loadPokemon()
+    private fun loadPokemons() {
+        viewModelScope.launch {
+
+            _pokemonList.value = repository.loadPokemon()
+
+        }
     }
-    fun load2(){
+    /*fun load2(){
         _pokemonList.value = repository.loadPokemon2()
-    }
+    }*/
 
 }
