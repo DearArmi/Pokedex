@@ -30,8 +30,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //val drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
-        //val navView = findViewById<NavigationView>(R.id.nav_view)
 
         toggle = ActionBarDrawerToggle(this, binding.drawerLayout, R.string.open, R.string.close)
         //passing toggle to drawerlayout
@@ -39,19 +37,18 @@ class MainActivity : AppCompatActivity() {
         //toggle ready to be used
         toggle.syncState()
 
-        //setting arrow to toggle
+        //setting up arrow to toggle
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         //Setting up Recycler LayoutManager
-        val pokemonRecycler = findViewById<RecyclerView>(R.id.pokemon_recycler_list)
-        pokemonRecycler.layoutManager = LinearLayoutManager(this)
+        binding.pokemonRecyclerList.layoutManager = LinearLayoutManager(this)
 
         //Setting up ViewModel
         viewModel = ViewModelProvider(this, MainViewModelFactory(application)).get(MainViewModel::class.java)
 
         //Setting up adapter to Recycler
         val adapter = PokemonAdapter()
-        pokemonRecycler.adapter = adapter
+        binding.pokemonRecyclerList.adapter = adapter
 
 
         viewModel.pokemonList.observe(this, Observer {

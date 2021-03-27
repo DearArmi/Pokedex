@@ -1,43 +1,76 @@
 package com.example.mypokedex
 
 import com.example.mypokedex.Api.service
-import com.example.mypokedex.Pokemon
+import com.example.mypokedex.DB.PokemonDataBase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 
-class MainRepository {
+class MainRepository(private val dataBase: PokemonDataBase) {
 
     suspend fun loadPokemon():MutableList<Pokemon>{
         return withContext(Dispatchers.IO){
 
-            var x = 4
-            val pokemonString = service.getPokemons()
-            val pokemonList = parsePokemon(pokemonString)
+            //var pokemonList = mutableListOf<Pokemon>()
+            for (i in 1 until 152){
+            val pokemonString = service.getSpecificPokemon("$i")
+            dataBase.pokemonDao.insertPokemon(parsePokemon(pokemonString))
+            }
 
-            pokemonList
+            getPokemonListFromDB()
 
         }
     }
 
-    private fun parsePokemon(pokemonString: String): MutableList<Pokemon> {
+    suspend  fun getPokemonListFromDB():MutableList<Pokemon> {
 
-        val pokemonList = mutableListOf<Pokemon>()
-        val types = listOf<String>("water", "water")
+        return withContext(Dispatchers.IO){
+
+            dataBase.pokemonDao.getAllPokemon()
+        }
+
+    }
+
+    private fun parsePokemon(pokemonString: String): Pokemon {
+
+        //val pokemonList = mutableListOf<Pokemon>()
+        val types = mutableListOf<String>()
 
         val pokemonJsonObject = JSONObject(pokemonString)
-        val pokemonArray = pokemonJsonObject.getJSONArray("results")
+        val pokemonArray = pokemonJsonObject.getJSONArray("forms")
+        val pokemon = pokemonArray[0] as JSONObject
+        val pokemonName = pokemon.getString("name")
+        val pokemonNumber = pokemonJsonObject.getInt("id")
 
-        for (i in 0 until 151){
+        val pokemonTypesArray = pokemonJsonObject.getJSONArray("types")
+        val pokemonTypeObject1 = pokemonTypesArray[0] as JSONObject
+        val pokemonTypeObject11 = pokemonTypeObject1.getJSONObject("type")
+        val type1 = pokemonTypeObject11.getString("name")
+
+        //types[0] = type1
+        types.add(type1)
+
+        if (pokemonTypesArray.length() > 1){
+
+            val pokemonTypeObject2 = pokemonTypesArray[1] as JSONObject
+            val pokemonTypeObject22 = pokemonTypeObject2.getJSONObject("type")
+            val type2 = pokemonTypeObject22.getString("name")
+            //types[1] = type2
+            types.add(type2)
+        }
+
+
+        /*for (i in 0 until 151){
 
             val pokemonObject = pokemonArray[i] as JSONObject
             val name = pokemonObject.getString("name")
 
             pokemonList.add(Pokemon(i+1, name, types))
 
-        }
+        }*/
+        //pokemonList.add(Pokemon(pokemonNumber, pokemonName, types))
 
-        return pokemonList
+        return Pokemon(pokemonNumber, pokemonName, types)
     }
 
     private fun parsePokemon2(pokemonString: String): MutableList<Pokemon> {
@@ -53,26 +86,11 @@ class MainRepository {
             val pokemonObject = pokemonArray[i] as JSONObject
             val name = pokemonObject.getString("name")
 
-            pokemonList.add(Pokemon(i+1, name, types))
+            //pokemonList.add(Pokemon(i+1, name, types))
 
         }
 
         return pokemonList
     }
 
-    /*fun loadPokemon2():MutableList<Pokemon>{
-
-        val listType = listOf<String>("water", "electric")
-        val listType2 = listOf<String>("electric")
-        val listType3 = listOf<String>("electric","electric")
-        val pokemonList = mutableListOf<Pokemon>()
-
-        pokemonList.add(Pokemon(1, "Bulbasaur", listType, 1,1,1,1,1,1,""))
-        pokemonList.add(Pokemon(1, "yvysur", listType, 1,1,1,1,1,1,""))
-        pokemonList.add(Pokemon(1, "Buaur", listType, 1,1,1,1,1,1,""))
-        pokemonList.add(Pokemon(1, "charmander", listType, 1,1,1,1,1,1,""))
-        pokemonList.add(Pokemon(1, "Bul", listType, 1,1,1,1,1,1,""))
-
-        return pokemonList
-    }*/
 }

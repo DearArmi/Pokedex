@@ -73,7 +73,7 @@ class PokemonAdapter: ListAdapter<Pokemon, PokemonAdapter.ViewHolder>(Diffcallba
             }*/
         }
         //Assigning pokemon image type depending on how many types that pokemon has
-        private fun oneOrTwoTypes(listTypes:List<String>):MutableList<Int>{
+        private fun oneOrTwoTypes(listTypes:MutableList<String>):MutableList<Int>{
 
             val imageListId = mutableListOf<Int>(0,0)
             var i = 0

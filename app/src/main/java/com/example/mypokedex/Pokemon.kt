@@ -1,7 +1,14 @@
 package com.example.mypokedex
 
-data class Pokemon(val number: Int, val name:String, val types: List<String>/*, val hp: Int, val attack:Int, val defense:Int, val specialAttack:Int,
-              val specialDefense:Int, val speed:Int, val image:String*/) {
+import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
+
+@Entity(tableName = "Pokemon")
+@Parcelize
+data class Pokemon(@PrimaryKey val number: Int, val name:String, val types: MutableList<String>/*, val hp: Int, val attack:Int, val defense:Int, val specialAttack:Int,
+              val specialDefense:Int, val speed:Int, val image:String*/):Parcelable {
 
     enum class PokemonType{
 
