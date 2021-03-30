@@ -40,6 +40,12 @@ android {
 
 dependencies {
 
+    //Gson in Converter class
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    //Test
+    testImplementation "com.google.truth:truth:1.0.1"
+    androidTestImplementation "com.google.truth:truth:1.0.1"
     //Room
     implementation 'androidx.room:room-runtime:2.2.6'
     kapt 'androidx.room:room-compiler:2.2.6'

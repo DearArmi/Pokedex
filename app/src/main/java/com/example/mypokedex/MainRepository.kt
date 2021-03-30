@@ -1,7 +1,7 @@
 package com.example.mypokedex
 
 import com.example.mypokedex.Api.service
-import com.example.mypokedex.DB.PokemonDataBase
+import com.example.mypokedex.DataBase.PokemonDataBase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
@@ -12,13 +12,20 @@ class MainRepository(private val dataBase: PokemonDataBase) {
         return withContext(Dispatchers.IO){
 
             //var pokemonList = mutableListOf<Pokemon>()
-            for (i in 1 until 152){
+            for (i in 1 until 386){
             val pokemonString = service.getSpecificPokemon("$i")
-            dataBase.pokemonDao.insertPokemon(parsePokemon(pokemonString))
+            val pokemon = parsePokemon(pokemonString)
+            dataBase.pokemonDao.insertPokemon(pokemon)
             }
 
             getPokemonListFromDB()
 
+        }
+    }
+    suspend fun checkDataBase():Int{
+        return withContext(Dispatchers.IO){
+
+            dataBase.pokemonDao.checkDataBase()
         }
     }
 
@@ -26,7 +33,14 @@ class MainRepository(private val dataBase: PokemonDataBase) {
 
         return withContext(Dispatchers.IO){
 
-            dataBase.pokemonDao.getAllPokemon()
+            dataBase.pokemonDao.getPokemonByRegion(1,2)
+        }
+
+    }
+
+    suspend fun getRegion(valueOne:Int, valueTwo:Int):MutableList<Pokemon>{
+        return withContext(Dispatchers.IO){
+            dataBase.pokemonDao.getPokemonByRegion(valueOne, valueTwo)
         }
 
     }

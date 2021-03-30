@@ -1,4 +1,4 @@
-package com.example.mypokedex.DB
+package com.example.mypokedex.DataBase
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -14,5 +14,11 @@ interface PokemonDao {
 
     @Query("SELECT * FROM Pokemon")
     fun getAllPokemon():MutableList<Pokemon>
+
+    @Query("SELECT * FROM Pokemon WHERE number BETWEEN :valueOne AND :valueTwo")
+    fun getPokemonByRegion(valueOne:Int, valueTwo:Int):MutableList<Pokemon>
+
+    @Query("SELECT COUNT(number) FROM Pokemon")
+    fun checkDataBase():Int
 
 }
