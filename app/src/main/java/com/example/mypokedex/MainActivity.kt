@@ -60,9 +60,12 @@ class MainActivity : AppCompatActivity() {
         binding.navView.setNavigationItemSelectedListener {
             //clicked item
             when(it.itemId){
-                R.id.kanto_option -> viewModel.getByRegion(/*1, 151*/)
-                R.id.jotho_option -> viewModel.getByRegion(/*152, 251*/)
-                R.id.hoenn_option -> viewModel.getByRegion(/*252, 386*/)
+                R.id.kanto_option -> {viewModel.getByRegion(1, 151)
+                                        Toast.makeText(this, "Kanto Region Selected", Toast.LENGTH_SHORT).show()}
+                R.id.jotho_option -> {viewModel.getByRegion(152, 251)
+                                        Toast.makeText(this, "Jhoto Region Selected", Toast.LENGTH_SHORT).show()}
+                R.id.hoenn_option -> {viewModel.getByRegion(252, 386)
+                                        Toast.makeText(this, "Hoenn Region Selected", Toast.LENGTH_SHORT).show()}
             }//returning true because del click was handled
             binding.drawerLayout.closeDrawers()
             true

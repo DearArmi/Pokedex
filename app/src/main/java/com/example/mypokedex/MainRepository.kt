@@ -33,7 +33,7 @@ class MainRepository(private val dataBase: PokemonDataBase) {
 
         return withContext(Dispatchers.IO){
 
-            dataBase.pokemonDao.getPokemonByRegion(1,2)
+            dataBase.pokemonDao.getPokemonByRegion(1,151)
         }
 
     }
@@ -47,8 +47,7 @@ class MainRepository(private val dataBase: PokemonDataBase) {
 
     private fun parsePokemon(pokemonString: String): Pokemon {
 
-        //val pokemonList = mutableListOf<Pokemon>()
-        val types = mutableListOf<String>()
+        val types = mutableListOf<String>("","")
 
         val pokemonJsonObject = JSONObject(pokemonString)
         val pokemonArray = pokemonJsonObject.getJSONArray("forms")
@@ -61,28 +60,18 @@ class MainRepository(private val dataBase: PokemonDataBase) {
         val pokemonTypeObject11 = pokemonTypeObject1.getJSONObject("type")
         val type1 = pokemonTypeObject11.getString("name")
 
-        //types[0] = type1
-        types.add(type1)
+        types[0] = type1
+        //types.add(type1)
 
         if (pokemonTypesArray.length() > 1){
 
             val pokemonTypeObject2 = pokemonTypesArray[1] as JSONObject
             val pokemonTypeObject22 = pokemonTypeObject2.getJSONObject("type")
             val type2 = pokemonTypeObject22.getString("name")
-            //types[1] = type2
-            types.add(type2)
+            types[1] = type2
+            //types.add(type2)
         }
 
-
-        /*for (i in 0 until 151){
-
-            val pokemonObject = pokemonArray[i] as JSONObject
-            val name = pokemonObject.getString("name")
-
-            pokemonList.add(Pokemon(i+1, name, types))
-
-        }*/
-        //pokemonList.add(Pokemon(pokemonNumber, pokemonName, types))
 
         return Pokemon(pokemonNumber, pokemonName, types)
     }

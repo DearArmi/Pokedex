@@ -25,7 +25,7 @@
             android:layout_toStartOf="@id/pokemon_types"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:gravity="center"
+            android:gravity="start"
             tools:text="Bulbasaur"
             style="@style/startText" />
 
@@ -44,7 +44,6 @@
             android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
             android:layout_marginEnd="16dp"
-
             tools:src="@drawable/water" />
 
     </RelativeLayout>

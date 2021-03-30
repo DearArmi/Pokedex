@@ -27,7 +27,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         viewModelScope.launch {
 
             if (repository.checkDataBase() > 0) {
-                _pokemonList.value = repository.getRegion(152,251)
+                _pokemonList.value = repository.getRegion(1,386)
             } else {
                 _pokemonList.value = repository.loadPokemon()
             }
@@ -41,10 +41,10 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         }}*/
 
 
-    fun getByRegion(){
-        viewModelScope.launch(Dispatchers.IO) {
+    fun getByRegion(valueOne:Int, valueTwo:Int){
+        viewModelScope.launch(Dispatchers.Main) {
 
-            //repository.getRegion()
+            _pokemonList.value = repository.getRegion(valueOne, valueTwo)
         }}
 
 }
