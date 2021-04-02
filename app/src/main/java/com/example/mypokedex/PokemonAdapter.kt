@@ -1,5 +1,6 @@
 package com.example.mypokedex
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mypokedex.databinding.PokemonListBinding
 import java.util.*
+
+//lateinit var  onItemClickListener: (Pokemon) -> Unit
 
 class PokemonAdapter: ListAdapter<Pokemon, PokemonAdapter.ViewHolder>(Diffcallback) {
 
@@ -24,7 +27,7 @@ class PokemonAdapter: ListAdapter<Pokemon, PokemonAdapter.ViewHolder>(Diffcallba
 
     }
 
-    //lateinit var  onItemClickListener: (Pokemon) -> Unit
+    lateinit var  onItemClickListener: (Pokemon) -> Unit
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonAdapter.ViewHolder {
 
@@ -39,7 +42,7 @@ class PokemonAdapter: ListAdapter<Pokemon, PokemonAdapter.ViewHolder>(Diffcallba
         holder.bind(pokemon)
 
     }
-    //Se coloca inner class para lateinit var  onItemClickListener: sirva dentro del adapter
+
     inner class ViewHolder(private val binding:PokemonListBinding): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(pokemon: Pokemon){
@@ -61,7 +64,7 @@ class PokemonAdapter: ListAdapter<Pokemon, PokemonAdapter.ViewHolder>(Diffcallba
 
             binding.executePendingBindings()
 
-            /*binding.root.setOnClickListener{
+            binding.root.setOnClickListener{
 
                 if (::onItemClickListener.isInitialized){
 
@@ -70,7 +73,7 @@ class PokemonAdapter: ListAdapter<Pokemon, PokemonAdapter.ViewHolder>(Diffcallba
                     Log.e("EqAdapter", "Lampda not Initialized")
                 }
 
-            }*/
+            }
         }
         //Assigning pokemon image type depending on how many types that pokemon has
         private fun oneOrTwoTypes(listTypes:MutableList<String>):MutableList<Int>{

@@ -1,5 +1,6 @@
 package com.example.mypokedex
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -12,26 +13,31 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mypokedex.PokemonAdapter
+import com.example.mypokedex.PokemonDetail.DetailActivity
 import com.example.mypokedex.R
 import com.example.mypokedex.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
 
-lateinit var toggle: ActionBarDrawerToggle //adding button to actionbar
-lateinit var binding: ActivityMainBinding
-lateinit var viewModel: MainViewModel
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var toggle: ActionBarDrawerToggle //adding button to actionbar
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var viewModel: MainViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //toggle = ActionBarDrawerToggle()
 
-        toggle = ActionBarDrawerToggle(this, binding.drawerLayout, R.string.open, R.string.close)
+        toggle = ActionBarDrawerToggle(this, binding.drawerLayout, binding.mainToolbar, R.string.open, R.string.close)
         //passing toggle to drawerlayout
         binding.drawerLayout.addDrawerListener(toggle)
         //toggle ready to be used
@@ -49,6 +55,8 @@ class MainActivity : AppCompatActivity() {
         //Setting up adapter to Recycler
         val adapter = PokemonAdapter()
         binding.pokemonRecyclerList.adapter = adapter
+
+
 
 
         viewModel.pokemonList.observe(this, Observer {
@@ -70,6 +78,24 @@ class MainActivity : AppCompatActivity() {
             binding.drawerLayout.closeDrawers()
             true
         }
+
+
+
+        adapter.onItemClickListener = {
+
+            openPokemonDetailActivity(it)
+
+        }
+
+    }
+
+
+    private fun openPokemonDetailActivity(pokemon: Pokemon) {
+
+        val intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra(DetailActivity.POKEMON_KEY, pokemon)
+        startActivity(intent)
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

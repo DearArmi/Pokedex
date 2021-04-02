@@ -15,10 +15,21 @@
         android:fitsSystemWindows="true"
         tools:context=".MainActivity">
 
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/main_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="8dp"
+                android:background="@color/design_default_color_secondary"
+                app:title="@string/app_name">
+
+            </androidx.appcompat.widget.Toolbar>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/pokemon_recycler_list"
@@ -27,13 +38,14 @@
                 tools:itemCount="5"
                 tools:listitem="@layout/pokemon_list"/>
 
-        </FrameLayout>
+        </LinearLayout>
 
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:elevation="8dp"
             android:layout_gravity="start"
             android:fitsSystemWindows="true"
             app:headerLayout="@layout/drawer_header"
