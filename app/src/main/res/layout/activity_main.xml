@@ -26,7 +26,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:elevation="8dp"
-                android:background="@color/design_default_color_secondary"
+                android:background="@color/red"
+                app:titleTextColor="@color/white"
                 app:title="@string/app_name">
 
             </androidx.appcompat.widget.Toolbar>
@@ -45,7 +46,6 @@
             android:id="@+id/nav_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:elevation="8dp"
             android:layout_gravity="start"
             android:fitsSystemWindows="true"
             app:headerLayout="@layout/drawer_header"

@@ -42,8 +42,10 @@ class MainActivity : AppCompatActivity() {
         binding.drawerLayout.addDrawerListener(toggle)
         //toggle ready to be used
         toggle.syncState()
-
+        //TODO---FIX THIS
         //setting up arrow to toggle
+        //supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        setSupportActionBar(binding.mainToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         //Setting up Recycler LayoutManager
@@ -55,8 +57,6 @@ class MainActivity : AppCompatActivity() {
         //Setting up adapter to Recycler
         val adapter = PokemonAdapter()
         binding.pokemonRecyclerList.adapter = adapter
-
-
 
 
         viewModel.pokemonList.observe(this, Observer {
@@ -78,8 +78,6 @@ class MainActivity : AppCompatActivity() {
             binding.drawerLayout.closeDrawers()
             true
         }
-
-
 
         adapter.onItemClickListener = {
 
@@ -107,12 +105,4 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 }
-/*
-                pokemonList.add(Pokemon(1, "Bulbasaur"))
-        pokemonList.add(Pokemon(1, "yvysur"))
-        pokemonList.add(Pokemon(1, "Buaur"))
-        pokemonList.add(Pokemon(1, "charmander"))
-        pokemonList.add(Pokemon(1, "Bul"))
-
-*/
 

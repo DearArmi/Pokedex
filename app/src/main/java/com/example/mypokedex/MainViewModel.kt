@@ -34,12 +34,6 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
 
         }
     }
-    /*fun getByGeneration(valueOne:Int, valueTwo:Int){
-
-        viewModelScope.launch {
-            _pokemonList.value = repository.getRegion(valueOne,valueTwo)
-        }}*/
-
 
     fun getByRegion(valueOne:Int, valueTwo:Int){
         viewModelScope.launch(Dispatchers.Main) {

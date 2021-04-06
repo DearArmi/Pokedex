@@ -48,13 +48,31 @@ class MainRepository(private val dataBase: PokemonDataBase) {
     private fun parsePokemon(pokemonString: String): Pokemon {
 
         val types = mutableListOf<String>("","")
+        val allStats = IntArray(6)
 
         val pokemonJsonObject = JSONObject(pokemonString)
-        val pokemonArray = pokemonJsonObject.getJSONArray("forms")
+        /*val pokemonArray = pokemonJsonObject.getJSONArray("forms")
         val pokemon = pokemonArray[0] as JSONObject
-        val pokemonName = pokemon.getString("name")
+        val pokemonName = pokemon.getString("name")*/
         val pokemonNumber = pokemonJsonObject.getInt("id")
+        val pokemonName = pokemonJsonObject.getString("name")
 
+        //Getting image URL
+        val pokemonSprites = pokemonJsonObject.getJSONObject("sprites")
+        val pokemonOther = pokemonSprites.getJSONObject("other")
+        val pokemonOfficial = pokemonOther.getJSONObject("official-artwork")
+        val pokemonImage = pokemonOfficial.getString("front_default")
+
+        //Getting stats
+        val pokemonStatsArray = pokemonJsonObject.getJSONArray("stats")
+        for (i in 0 until pokemonStatsArray.length()){
+            val pokemonStat = pokemonStatsArray[i] as JSONObject
+            val stat = pokemonStat.getInt("base_stat")
+
+            allStats[i] = stat
+        }
+
+        //Getting types
         val pokemonTypesArray = pokemonJsonObject.getJSONArray("types")
         val pokemonTypeObject1 = pokemonTypesArray[0] as JSONObject
         val pokemonTypeObject11 = pokemonTypeObject1.getJSONObject("type")
@@ -73,7 +91,7 @@ class MainRepository(private val dataBase: PokemonDataBase) {
         }
 
 
-        return Pokemon(pokemonNumber, pokemonName, types)
+        return Pokemon(pokemonNumber, pokemonName, types, pokemonImage, allStats)
     }
 
     private fun parsePokemon2(pokemonString: String): MutableList<Pokemon> {

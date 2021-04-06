@@ -5,6 +5,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.mypokedex.DataBase.PokemonDao
 import com.example.mypokedex.Pokemon
 
@@ -17,13 +19,25 @@ abstract class PokemonDataBase:RoomDatabase(){
 }
     private lateinit var INSTANCE: PokemonDataBase
 
+    //TODO---FIX MIGRATION
+    /*val migration1_2:Migration = object :Migration(1,2){
+
+        override fun migrate(database: SupportSQLiteDatabase) {
+            database.execSQL("ALTER TABLE Pokemon ADD COLUMN image TEXT DEFAULT ''")
+            database.execSQL("ALTER TABLE Pokemon ADD COLUMN stats TEXT DEFAULT ''")
+        }
+
+    }*/
+
     fun getDataBase(context: Context):PokemonDataBase{
 
         synchronized(PokemonDataBase::class.java){
 
             if (!::INSTANCE.isInitialized){
 
-                INSTANCE = Room.databaseBuilder(context.applicationContext, PokemonDataBase::class.java, "pokemon_db").build()
+                INSTANCE = Room.databaseBuilder(context.applicationContext, PokemonDataBase::class.java, "pokemon_db")
+                        //.addMigrations(migration1_2)
+                        .build()
 
             }
             return INSTANCE

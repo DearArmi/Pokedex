@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken
 
 class Converters {
 
+    //Lists
     @TypeConverter
     fun fromList(typeList: MutableList<String>):String{
 
@@ -18,6 +19,21 @@ class Converters {
 
         val typeList = object : TypeToken<MutableList<String>>(){}.type
         return Gson().fromJson(types, typeList)
+    }
+
+    //Arrays
+    @TypeConverter
+    fun fromArray(statArray: IntArray):String{
+
+        return Gson().toJson(statArray)
+
+    }
+
+    @TypeConverter
+    fun fromString2(stats: String):IntArray{
+
+        val statsArray = object : TypeToken<IntArray>(){}.type
+        return Gson().fromJson(stats, statsArray)
     }
 
 }

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <color name="light_red">#F44336</color>
+    <color name="red">#D32F2F</color>
+    <color name="yellow">#EFCC63</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -7,4 +11,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    //Color for stats
+    <color name="hp">#ECA5A5</color>
+    <color name="attack">#E8DE8E</color>
+    <color name="defense">#BBE38E</color>
+    <color name="speed">#8BD6DF</color>
 </resources>

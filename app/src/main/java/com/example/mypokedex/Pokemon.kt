@@ -7,8 +7,8 @@ import kotlinx.android.parcel.Parcelize
 
 @Entity(tableName = "Pokemon")
 @Parcelize
-data class Pokemon(@PrimaryKey val number: Int, val name:String, val types: MutableList<String>/*, val hp: Int, val attack:Int, val defense:Int, val specialAttack:Int,
-              val specialDefense:Int, val speed:Int, val image:String*/):Parcelable {
+data class Pokemon(@PrimaryKey val number: Int, val name:String, val types: MutableList<String>, val image:String, val stats:IntArray/*,val hp: Int, val attack:Int, val defense:Int, val specialAttack:Int,
+              val specialDefense:Int, val speed:Int*/):Parcelable {
 
     /*
     @PrimaryKey(autoGenerate = true)
