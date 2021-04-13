@@ -11,4 +11,10 @@
     <string name="attack">Attack: %d</string>
     <string name="defense">Defense: %d</string>
     <string name="speed">Speed: %d</string>
+    <string name="sinnoh">Sinnoh</string>
+    <string name="unova">Unova</string>
+    <string name="kalos">Kalos</string>
+    <string name="alola">Alola</string>
+    <string name="galar">Galar</string>
+    <string name="no_region_selected">No Region Selected</string>
 </resources>

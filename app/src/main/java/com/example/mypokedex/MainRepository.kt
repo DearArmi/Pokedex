@@ -8,41 +8,57 @@ import org.json.JSONObject
 
 class MainRepository(private val dataBase: PokemonDataBase) {
 
-    suspend fun loadPokemon():MutableList<Pokemon>{
+    private suspend fun loadPokemonFromApi(valueOne: Int, valueTwo: Int):MutableList<Pokemon>{
         return withContext(Dispatchers.IO){
 
-            //var pokemonList = mutableListOf<Pokemon>()
-            for (i in 1 until 386){
-            val pokemonString = service.getSpecificPokemon("$i")
-            val pokemon = parsePokemon(pokemonString)
-            dataBase.pokemonDao.insertPokemon(pokemon)
+            var pokemonList = mutableListOf<Pokemon>()
+
+            for (i in valueOne until valueTwo+1){
+                val pokemonString = service.getSpecificPokemon("$i")
+                val pokemon = parsePokemon(pokemonString)
+                dataBase.pokemonDao.insertPokemon(pokemon)
             }
 
-            getPokemonListFromDB()
+            pokemonList = getPokemonListFromDB(valueOne, valueTwo)
+            pokemonList
 
         }
     }
-    suspend fun checkDataBase():Int{
+    private suspend fun checkDataBase(valueOne: Int, valueTwo: Int):Int{
         return withContext(Dispatchers.IO){
 
-            dataBase.pokemonDao.checkDataBase()
+            dataBase.pokemonDao.checkRegionInDataBase(valueOne, valueTwo)
         }
     }
 
-    suspend  fun getPokemonListFromDB():MutableList<Pokemon> {
+    private suspend  fun getPokemonListFromDB(valueOne: Int, valueTwo: Int):MutableList<Pokemon> {
 
         return withContext(Dispatchers.IO){
 
-            dataBase.pokemonDao.getPokemonByRegion(1,151)
+            dataBase.pokemonDao.getPokemonByRegion(valueOne, valueTwo)
         }
 
     }
 
     suspend fun getRegion(valueOne:Int, valueTwo:Int):MutableList<Pokemon>{
         return withContext(Dispatchers.IO){
-            dataBase.pokemonDao.getPokemonByRegion(valueOne, valueTwo)
+
+            var pokemonList = mutableListOf<Pokemon>()
+            //TODO----SET cCONDITION BY REGION
+            pokemonList = if(checkDataBase(valueOne, valueTwo)>0){
+
+                dataBase.pokemonDao.getPokemonByRegion(valueOne, valueTwo)
+
+            }else{
+                loadPokemonFromApi(valueOne, valueTwo)
+            }
+            pokemonList
         }
 
+    }
+
+    fun delete(){
+        dataBase.pokemonDao.delete()
     }
 
     private fun parsePokemon(pokemonString: String): Pokemon {
@@ -94,24 +110,5 @@ class MainRepository(private val dataBase: PokemonDataBase) {
         return Pokemon(pokemonNumber, pokemonName, types, pokemonImage, allStats)
     }
 
-    private fun parsePokemon2(pokemonString: String): MutableList<Pokemon> {
-
-        val pokemonList = mutableListOf<Pokemon>()
-        val types = listOf<String>("water", "water")
-
-        val pokemonJsonObject = JSONObject(pokemonString)
-        val pokemonArray = pokemonJsonObject.getJSONArray("results")
-
-        for (i in 0 until 151){
-
-            val pokemonObject = pokemonArray[i] as JSONObject
-            val name = pokemonObject.getString("name")
-
-            //pokemonList.add(Pokemon(i+1, name, types))
-
-        }
-
-        return pokemonList
-    }
 
 }

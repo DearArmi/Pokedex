@@ -17,6 +17,36 @@
             android:id="@+id/hoenn_option"
             android:icon="@drawable/ic_baseline_catching_pokemon_24"
             android:title="@string/hoenn"/>
+
+        <item
+            android:id="@+id/sinnoh_option"
+            android:icon="@drawable/ic_baseline_catching_pokemon_24"
+            android:title="@string/sinnoh"/>
+
+        <item
+            android:id="@+id/unova_option"
+            android:icon="@drawable/ic_baseline_catching_pokemon_24"
+            android:title="@string/unova"/>
+
+        <item
+            android:id="@+id/kalos_option"
+            android:icon="@drawable/ic_baseline_catching_pokemon_24"
+            android:title="@string/kalos"/>
+
+        <item
+            android:id="@+id/alola_option"
+            android:icon="@drawable/ic_baseline_catching_pokemon_24"
+            android:title="@string/alola"/>
+
+        <item
+            android:id="@+id/galar_option"
+            android:icon="@drawable/ic_baseline_catching_pokemon_24"
+            android:title="@string/galar"/>
+
+        <item
+            android:id="@+id/delete"
+            android:icon="@drawable/ic_arrow_back_24"
+            android:title="@string/app_name"/>
     </group>
 
 

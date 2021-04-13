@@ -13,33 +13,58 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
+
         tools:context=".MainActivity">
 
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:background="@android:color/darker_gray">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/main_toolbar"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:elevation="8dp"
-                android:background="@color/red"
-                app:titleTextColor="@color/white"
-                app:title="@string/app_name">
+                android:orientation="vertical">
 
-            </androidx.appcompat.widget.Toolbar>
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/main_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="8dp"
+                    android:background="@color/red"
+                    app:titleTextColor="@color/white"
+                    app:title="@string/app_name">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/pokemon_recycler_list"
-                android:layout_width="match_parent"
+                </androidx.appcompat.widget.Toolbar>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/pokemon_recycler_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/pokemon_list"/>
+
+            </LinearLayout>
+
+                <ProgressBar
+                    android:id="@+id/main_progressbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/empty_text"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:itemCount="5"
-                tools:listitem="@layout/pokemon_list"/>
-
-        </LinearLayout>
+                android:text="@string/no_region_selected"
+                android:layout_gravity="center"
+                android:visibility="visible"
+                android:textColor="@android:color/darker_gray"
+                style="@style/startText"/>
+        </FrameLayout>
 
 
         <com.google.android.material.navigation.NavigationView
