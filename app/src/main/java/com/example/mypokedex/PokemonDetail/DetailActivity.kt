@@ -2,6 +2,7 @@ package com.example.mypokedex.PokemonDetail
 
 import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -40,6 +41,12 @@ class DetailActivity : AppCompatActivity() {
 
         setPokemonData(pokemon)
 
+        binding.floatingBt.setOnClickListener {
+
+            val mediaPlayer = MediaPlayer.create(this, R.raw.sound_effect)
+            mediaPlayer.start()
+        }
+
     }
 
     private fun setPokemonData(pokemon: Pokemon) {
@@ -72,6 +79,8 @@ class DetailActivity : AppCompatActivity() {
         binding.pokemonHp.text = getString(R.string.hp, pokemon.stats[0])
         binding.pokemonAttack.text = getString(R.string.attack, pokemon.stats[1])
         binding.pokemonDefense.text = getString(R.string.defense, pokemon.stats[2])
+        binding.pokemonSa.text = getString(R.string.sa, pokemon.stats[3])
+        binding.pokemonSd.text = getString(R.string.sd, pokemon.stats[4])
         binding.pokemomSpeed.text = getString(R.string.speed, pokemon.stats[5])
 
     }

@@ -1,5 +1,6 @@
 package com.example.mypokedex
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import com.example.mypokedex.databinding.PokemonList2Binding
 import com.example.mypokedex.databinding.PokemonListBinding
 import java.util.*
 
@@ -31,7 +34,7 @@ class PokemonAdapter: ListAdapter<Pokemon, PokemonAdapter.ViewHolder>(Diffcallba
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonAdapter.ViewHolder {
 
-        val binding = PokemonListBinding.inflate(LayoutInflater.from(parent.context))
+        val binding = PokemonList2Binding.inflate(LayoutInflater.from(parent.context))
         return  ViewHolder(binding)
 
     }
@@ -43,12 +46,15 @@ class PokemonAdapter: ListAdapter<Pokemon, PokemonAdapter.ViewHolder>(Diffcallba
 
     }
 
-    inner class ViewHolder(private val binding:PokemonListBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding:PokemonList2Binding): RecyclerView.ViewHolder(binding.root) {
 
+        @SuppressLint("SetTextI18n")
         fun bind(pokemon: Pokemon){
 
-            binding.pokemonNumber.text = pokemon.number.toString()
+            binding.pokemonNumber.text = "#" + pokemon.number.toString()
             binding.pokemonName.text = pokemon.name.capitalize()
+
+            binding.miniPokemonImage.load(pokemon.pokemonPreview)
 
             //TODO Find a way to paint just one type and not assigning empty image for those pokemon that has one type (Array might be a solution)
             if(pokemon.types.size >1){

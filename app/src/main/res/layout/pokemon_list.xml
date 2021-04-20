@@ -7,12 +7,12 @@
 
     </data>
 
+    <!--android:layoutAnimation="@anim/layout_animation" -->
 <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:elevation="12dp"
     android:layout_margin="4dp"
-    android:layoutAnimation="@anim/layout_animation"
     app:cardCornerRadius="12dp">
 
     <RelativeLayout

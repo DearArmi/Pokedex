@@ -1,12 +1,19 @@
 package com.example.mypokedex
 
+import android.app.Application
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import coil.ImageLoader
+import coil.request.ImageRequest
+import coil.request.SuccessResult
 import com.example.mypokedex.Api.service
 import com.example.mypokedex.DataBase.PokemonDataBase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 
-class MainRepository(private val dataBase: PokemonDataBase) {
+class MainRepository(private val dataBase: PokemonDataBase, private val application:Context) {
 
     private suspend fun loadPokemonFromApi(valueOne: Int, valueTwo: Int):MutableList<Pokemon>{
         return withContext(Dispatchers.IO){
@@ -40,12 +47,12 @@ class MainRepository(private val dataBase: PokemonDataBase) {
 
     }
 
-    suspend fun getRegion(valueOne:Int, valueTwo:Int):MutableList<Pokemon>{
+    suspend fun getRegion(valueOne:Int, valueTwo:Int, totalPokemon:Int):MutableList<Pokemon>{
         return withContext(Dispatchers.IO){
 
             var pokemonList = mutableListOf<Pokemon>()
-            //TODO----SET cCONDITION BY REGION
-            pokemonList = if(checkDataBase(valueOne, valueTwo)>0){
+            //TODO----SET CONDITION BY REGION
+            pokemonList = if(checkDataBase(valueOne, valueTwo) == totalPokemon){
 
                 dataBase.pokemonDao.getPokemonByRegion(valueOne, valueTwo)
 
@@ -61,10 +68,11 @@ class MainRepository(private val dataBase: PokemonDataBase) {
         dataBase.pokemonDao.delete()
     }
 
-    private fun parsePokemon(pokemonString: String): Pokemon {
+    private suspend fun parsePokemon(pokemonString: String): Pokemon {
 
         val types = mutableListOf<String>("","")
         val allStats = IntArray(6)
+        val pokemonPreviewImage:Bitmap
 
         val pokemonJsonObject = JSONObject(pokemonString)
         /*val pokemonArray = pokemonJsonObject.getJSONArray("forms")
@@ -78,6 +86,13 @@ class MainRepository(private val dataBase: PokemonDataBase) {
         val pokemonOther = pokemonSprites.getJSONObject("other")
         val pokemonOfficial = pokemonOther.getJSONObject("official-artwork")
         val pokemonImage = pokemonOfficial.getString("front_default")
+
+        //Getting PreviewImage
+        val version = pokemonSprites.getJSONObject("versions")
+        val generation = version.getJSONObject("generation-v")
+        val blackAndWhite = generation.getJSONObject("black-white")
+        val pokemonPreview = blackAndWhite.getString("front_default")//.toByteArray()
+        pokemonPreviewImage = getBitmap(pokemonPreview)
 
         //Getting stats
         val pokemonStatsArray = pokemonJsonObject.getJSONArray("stats")
@@ -107,7 +122,18 @@ class MainRepository(private val dataBase: PokemonDataBase) {
         }
 
 
-        return Pokemon(pokemonNumber, pokemonName, types, pokemonImage, allStats)
+        return Pokemon(pokemonNumber, pokemonName, types, pokemonImage, allStats, pokemonPreviewImage)
+    }
+
+    //TODO----FIND A WAY TO TAKE THIS OUT OF HERE
+
+    private suspend fun getBitmap(url:String):Bitmap{
+        val loading = ImageLoader(application)
+        val request = ImageRequest.Builder(application).data(url).build()
+
+        val result = (loading.execute(request) as SuccessResult).drawable
+        return (result as BitmapDrawable).bitmap
+
     }
 
 

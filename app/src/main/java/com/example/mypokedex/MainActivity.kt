@@ -1,6 +1,7 @@
 package com.example.mypokedex
 
 import android.content.Intent
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -73,7 +74,7 @@ class MainActivity : AppCompatActivity() {
                 ApiResponseStatus.DONE -> {binding.mainProgressbar.visibility = View.GONE }
                 ApiResponseStatus.LOADING -> {binding.mainProgressbar.visibility = View.VISIBLE }
                 ApiResponseStatus.ERROR -> {binding.mainProgressbar.visibility = View.GONE
-                                            Toast.makeText(this,"No Internet", Toast.LENGTH_SHORT).show()}
+                                            Toast.makeText(this,"No Internet, Download Incomplete", Toast.LENGTH_SHORT).show() }
             }
 
         })
@@ -82,33 +83,34 @@ class MainActivity : AppCompatActivity() {
         binding.navView.setNavigationItemSelectedListener {
             //clicked item
             when(it.itemId){
-                R.id.kanto_option -> {viewModel.getByRegion(1, 151)
+                R.id.kanto_option -> {viewModel.getByRegion(1, 151,151)
                                         Toast.makeText(this, "Kanto Region Selected", Toast.LENGTH_SHORT).show()}
-                R.id.jotho_option -> {viewModel.getByRegion(152, 251)
+                R.id.jotho_option -> {viewModel.getByRegion(152, 251,100)
                                         Toast.makeText(this, "Jhoto Region Selected", Toast.LENGTH_SHORT).show()}
-                R.id.hoenn_option -> {viewModel.getByRegion(252, 386)
+                R.id.hoenn_option -> {viewModel.getByRegion(252, 386,135)
                                         Toast.makeText(this, "Hoenn Region Selected", Toast.LENGTH_SHORT).show()}
-                R.id.sinnoh_option -> {viewModel.getByRegion(387, 493)
+                R.id.sinnoh_option -> {viewModel.getByRegion(387, 493,107)
                                         Toast.makeText(this, "Sinnoh Region Selected", Toast.LENGTH_SHORT).show()}
-                R.id.unova_option -> {viewModel.getByRegion(494, 649)
+                R.id.unova_option -> {viewModel.getByRegion(494, 649,156)
                                         Toast.makeText(this, "Unova Region Selected", Toast.LENGTH_SHORT).show()}
-                R.id.kalos_option -> {viewModel.getByRegion(650, 721)
+                R.id.kalos_option -> {viewModel.getByRegion(650, 721,72)
                                         Toast.makeText(this, "Kalos Region Selected", Toast.LENGTH_SHORT).show()}
-                R.id.alola_option -> {viewModel.getByRegion(722, 809)
+                R.id.alola_option -> {viewModel.getByRegion(722, 809,88)
                                         Toast.makeText(this, "Alola Region Selected", Toast.LENGTH_SHORT).show()}
-                R.id.galar_option -> {viewModel.getByRegion(810, 898)
+                R.id.galar_option -> {viewModel.getByRegion(810, 898,89)
                                         Toast.makeText(this, "Galar Region Selected", Toast.LENGTH_SHORT).show()}
                 R.id.delete -> {viewModel.delete()
-                    Toast.makeText(this, "ya", Toast.LENGTH_SHORT).show()}
+                                Toast.makeText(this, "ya", Toast.LENGTH_SHORT).show()}
             }//returning true because del click was handled
             binding.drawerLayout.closeDrawers()
+            touchSound()
             true
         }
 
         adapter.onItemClickListener = {
 
             openPokemonDetailActivity(it)
-
+            touchSound()
         }
 
     }
@@ -132,6 +134,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.options, menu)
+        return true
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         if(toggle.onOptionsItemSelected(item)){
@@ -139,6 +146,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun touchSound(){
+
+        val sound = MediaPlayer.create(this, R.raw.sound_effect)
+        sound.start()
+
     }
 }
 

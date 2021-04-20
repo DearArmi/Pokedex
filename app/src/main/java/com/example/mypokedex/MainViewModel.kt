@@ -17,7 +17,7 @@ private val Tag = MainViewModel::class.java.simpleName
 class MainViewModel(application: Application): AndroidViewModel(application) {
 
     private val dataBase = getDataBase(application)
-    private val repository = MainRepository(dataBase)
+    private val repository = MainRepository(dataBase, application)
 
     private var _pokemonList = MutableLiveData<MutableList<Pokemon>>()
     val pokemonList: LiveData<MutableList<Pokemon>>
@@ -62,12 +62,18 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
 
     }
 
-    fun getByRegion(valueOne:Int, valueTwo:Int){
+    fun getByRegion(valueOne:Int, valueTwo:Int, totalPokemon:Int){
         viewModelScope.launch(Dispatchers.Main) {
 
-            _status.value = ApiResponseStatus.LOADING
-            _pokemonList.value = repository.getRegion(valueOne, valueTwo)
-            _status.value = ApiResponseStatus.DONE
+            try {
+                _status.value = ApiResponseStatus.LOADING
+                _pokemonList.value = repository.getRegion(valueOne, valueTwo, totalPokemon)
+                _status.value = ApiResponseStatus.DONE
+            }catch (e:UnknownHostException){
+                _status.value = ApiResponseStatus.ERROR
+                //_pokemonList.value?.removeAll(mutableListOf<Pokemon>())
+                Log.d(Tag,"No internet or download incomplete", e)
+            }
         }}
 
 }

@@ -15,6 +15,8 @@
     //Color for stats
     <color name="hp">#ECA5A5</color>
     <color name="attack">#E8DE8E</color>
+    <color name="special_attack">#F4E876</color>
     <color name="defense">#BBE38E</color>
+    <color name="special_defense">#8ADC8D</color>
     <color name="speed">#8BD6DF</color>
 </resources>

@@ -1,20 +1,27 @@
 <resources>
     <string name="app_name">MyPokedex</string>
-    <string name="kanto">Kanto</string>
-    <string name="johto">Johto</string>
-    <string name="hoenn">Hoenn</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
-    <!-- TODO: Remove or change this placeholder text -->
 
+    <!--Stats -->
     <string name="hp">HP: %d</string>
     <string name="attack">Attack: %d</string>
     <string name="defense">Defense: %d</string>
     <string name="speed">Speed: %d</string>
+    <string name="sa">SA: %d</string>
+    <string name="sd">SD: %d</string>
+    <string name="number"># %d</string>
+    <!--Region -->
+    <string name="kanto">Kanto</string>
+    <string name="johto">Johto</string>
+    <string name="hoenn">Hoenn</string>
     <string name="sinnoh">Sinnoh</string>
     <string name="unova">Unova</string>
     <string name="kalos">Kalos</string>
     <string name="alola">Alola</string>
     <string name="galar">Galar</string>
     <string name="no_region_selected">No Region Selected</string>
+    <string name="sort_by_type">Sort by Type</string>
+    <string name="sort_by_name">Sort by Name</string>
+
 </resources>

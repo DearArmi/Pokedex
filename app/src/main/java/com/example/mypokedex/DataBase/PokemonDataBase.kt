@@ -10,7 +10,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.mypokedex.DataBase.PokemonDao
 import com.example.mypokedex.Pokemon
 
-@Database(entities = [Pokemon::class], version = 1)
+@Database(entities = [Pokemon::class], version = 2)
 @TypeConverters(Converters::class)
 abstract class PokemonDataBase:RoomDatabase(){
 
@@ -19,15 +19,15 @@ abstract class PokemonDataBase:RoomDatabase(){
 }
     private lateinit var INSTANCE: PokemonDataBase
 
-    //TODO---FIX MIGRATION
-    /*val migration1_2:Migration = object :Migration(1,2){
+    //TODO---FIX MIGRATION, is working but not replacing all existing data an Update could be the solution
+    val migration1_2:Migration = object :Migration(1,2){
 
+        //Blob is type used to store images, sounds, videos...
         override fun migrate(database: SupportSQLiteDatabase) {
-            database.execSQL("ALTER TABLE Pokemon ADD COLUMN image TEXT DEFAULT ''")
-            database.execSQL("ALTER TABLE Pokemon ADD COLUMN stats TEXT DEFAULT ''")
+            database.execSQL("ALTER TABLE 'Pokemon' ADD COLUMN 'pokemonPreview' BLOB DEFAULT '0'")
         }
 
-    }*/
+    }
 
     fun getDataBase(context: Context):PokemonDataBase{
 
@@ -36,7 +36,7 @@ abstract class PokemonDataBase:RoomDatabase(){
             if (!::INSTANCE.isInitialized){
 
                 INSTANCE = Room.databaseBuilder(context.applicationContext, PokemonDataBase::class.java, "pokemon_db")
-                        //.addMigrations(migration1_2)
+                        .addMigrations(migration1_2)
                         .build()
 
             }

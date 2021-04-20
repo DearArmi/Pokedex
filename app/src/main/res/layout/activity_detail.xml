@@ -79,31 +79,6 @@
                 style="@style/startText"/>
 
             <TextView
-                android:id="@+id/pokemon_attack"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/attack"
-                android:background="@color/attack"
-                style="@style/startText"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/pokemon_defense"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/defense"
-                android:background="@color/defense"
-                style="@style/startText"/>
-
-            <TextView
                 android:id="@+id/pokemom_speed"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -115,16 +90,78 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/pokemon_attack"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/attack"
+                android:background="@color/attack"
+                style="@style/startText"/>
+
+            <TextView
+                android:id="@+id/pokemon_defense"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/defense"
+                android:background="@color/defense"
+                style="@style/startText"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/pokemon_sa"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/sa"
+                android:background="@color/special_attack"
+                style="@style/startText"/>
+
+            <TextView
+                android:id="@+id/pokemon_sd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/sd"
+                android:background="@color/special_defense"
+                style="@style/startText"/>
+
+
+        </LinearLayout>
+
         <TextView
             android:id="@+id/pokemon_shh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/startText"
             android:textSize="32sp"
-            android:text="Pokémon,[a][1][2][3] also known as Pocket Monsters[b] in Japan, is a Japanese media franchise managed by The Pokémon Company, a company founded by Nintendo, Game Freak, and Creatures. The franchise was created by Satoshi Tajiri in 1995,[4] and is centered on fictional creatures called dshs sd hst hs h srth  sggh fsgh rh rhjdshffjashggfgkjdahsdgfhaskjfWEEFFASGAS"/>
+            android:text="Charizard first appeared in the video games Pokémon Red and Blue (Pokémon Red and Green in Japan) and subsequent sequels. They have later appeared in various merchandise, spinoff titles and animated and printed adaptations of the franchise. It is known as the Flame Pokémon. Shin-ichiro Miki, the actor who voices James in the original Japanese version of the Pokémon anime, voices Charizard in both the Japanese and English-language versions of the anime."/>
 
 
     </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+            android:id="@+id/floating_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_play_arrow_24"
+            android:layout_margin="16dp"
+            android:layout_gravity="bottom|end">
+
+        </com.google.android.material.floatingactionbutton.FloatingActionButton>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
