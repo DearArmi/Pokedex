@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.contains
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -53,7 +54,7 @@ class PokemonAdapter: ListAdapter<Pokemon, PokemonAdapter.ViewHolder>(Diffcallba
 
             binding.pokemonNumber.text = "#" + pokemon.number.toString()
             binding.pokemonName.text = pokemon.name.capitalize()
-
+            
             binding.miniPokemonImage.load(pokemon.pokemonPreview)
 
             //TODO Find a way to paint just one type and not assigning empty image for those pokemon that has one type (Array might be a solution)

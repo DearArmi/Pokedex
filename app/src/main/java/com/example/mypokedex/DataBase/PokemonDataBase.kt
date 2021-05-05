@@ -7,7 +7,6 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.example.mypokedex.DataBase.PokemonDao
 import com.example.mypokedex.Pokemon
 
 @Database(entities = [Pokemon::class], version = 2)

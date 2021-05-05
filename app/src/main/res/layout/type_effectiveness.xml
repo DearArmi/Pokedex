@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/este"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/startText"
+            android:text="@string/double_damage_from" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/weak1"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                tools:src="@drawable/electric" />
+
+            <ImageView
+                android:id="@+id/weak2"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                tools:src="@drawable/electric" />
+
+            <ImageView
+                android:id="@+id/weak3"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                tools:src="@drawable/electric" />
+
+            <ImageView
+                android:id="@+id/weak4"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                tools:src="@drawable/electric" />
+
+            <ImageView
+                android:id="@+id/weak5"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                tools:src="@drawable/electric" />
+
+            <ImageView
+                android:id="@+id/weak6"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                tools:src="@drawable/electric" />
+
+            <ImageView
+                android:id="@+id/weak7"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                tools:src="@drawable/electric" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/startText"
+            android:text="@string/double_damage_to" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/strong1"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                tools:src="@drawable/electric" />
+
+            <ImageView
+                android:id="@+id/strong2"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                tools:src="@drawable/electric" />
+
+            <ImageView
+                android:id="@+id/strong3"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                tools:src="@drawable/electric" />
+
+            <ImageView
+                android:id="@+id/strong4"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                tools:src="@drawable/electric" />
+
+            <ImageView
+                android:id="@+id/strong5"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                tools:src="@drawable/electric" />
+
+            <ImageView
+                android:id="@+id/strong6"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                tools:src="@drawable/electric" />
+
+            <ImageView
+                android:id="@+id/strong7"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                tools:src="@drawable/electric" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</layout>

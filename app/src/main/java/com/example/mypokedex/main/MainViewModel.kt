@@ -1,4 +1,4 @@
-package com.example.mypokedex
+package com.example.mypokedex.main
 
 import android.app.Application
 import android.util.Log
@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.mypokedex.Api.ApiResponseStatus
 import com.example.mypokedex.DataBase.getDataBase
+import com.example.mypokedex.Pokemon
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.net.UnknownHostException
@@ -22,6 +23,10 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     private var _pokemonList = MutableLiveData<MutableList<Pokemon>>()
     val pokemonList: LiveData<MutableList<Pokemon>>
         get() = _pokemonList
+
+    /*private var _searchPokemonList = MutableLiveData<Flow<MutableList<Pokemon>>>()
+    val searchPokemonList:LiveData<Flow<MutableList<Pokemon>>>
+        get() = _searchPokemonList*/
 
     private var _status = MutableLiveData<ApiResponseStatus>()
     val status:LiveData<ApiResponseStatus>
@@ -61,6 +66,17 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         }
 
     }
+
+    fun searchPokemon(characters:String):LiveData<MutableList<Pokemon>>{
+        return repository.searchPokemon2(characters)
+    }
+/*
+    fun searchPokemon(characters:String){
+        viewModelScope.launch(Dispatchers.Main) {
+
+            _searchPokemonList.value = repository.searchPokemon2(characters)
+        }
+    }*/
 
     fun getByRegion(valueOne:Int, valueTwo:Int, totalPokemon:Int){
         viewModelScope.launch(Dispatchers.Main) {

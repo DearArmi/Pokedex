@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context=".MainActivity">
+        tools:context=".main.MainActivity">
 
 
         <FrameLayout
@@ -42,7 +42,8 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/pokemon_recycler_list"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="4dp"
                     tools:itemCount="5"
                     tools:listitem="@layout/pokemon_list2"/>
 

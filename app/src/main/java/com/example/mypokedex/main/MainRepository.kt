@@ -1,14 +1,15 @@
-package com.example.mypokedex
+package com.example.mypokedex.main
 
-import android.app.Application
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import androidx.lifecycle.LiveData
 import coil.ImageLoader
 import coil.request.ImageRequest
 import coil.request.SuccessResult
 import com.example.mypokedex.Api.service
 import com.example.mypokedex.DataBase.PokemonDataBase
+import com.example.mypokedex.Pokemon
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
@@ -31,6 +32,21 @@ class MainRepository(private val dataBase: PokemonDataBase, private val applicat
 
         }
     }
+
+    suspend fun searchPokemon(pokemonName:String):MutableList<Pokemon>{
+        return withContext(Dispatchers.IO){
+
+            dataBase.pokemonDao.searchPokemon(pokemonName)
+        }
+    }
+
+    fun searchPokemon2(pokemonName:String):LiveData<MutableList<Pokemon>>{
+
+
+            return dataBase.pokemonDao.searchPokemon2(pokemonName)
+
+    }
+
     private suspend fun checkDataBase(valueOne: Int, valueTwo: Int):Int{
         return withContext(Dispatchers.IO){
 

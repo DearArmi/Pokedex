@@ -1,4 +1,4 @@
-package com.example.mypokedex
+package com.example.mypokedex.main
 
 import android.content.Intent
 import android.media.MediaPlayer
@@ -7,30 +7,32 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
+import androidx.appcompat.widget.SearchView
+
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
+
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+
 import com.example.mypokedex.Api.ApiResponseStatus
+import com.example.mypokedex.Pokemon
 import com.example.mypokedex.PokemonAdapter
+
 import com.example.mypokedex.PokemonDetail.DetailActivity
 import com.example.mypokedex.R
+
 import com.example.mypokedex.databinding.ActivityMainBinding
-import com.google.android.material.navigation.NavigationView
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     private lateinit var toggle: ActionBarDrawerToggle //adding button to actionbar
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
+    private lateinit var adapter: PokemonAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +42,10 @@ class MainActivity : AppCompatActivity() {
 
         //toggle = ActionBarDrawerToggle()
 
-        toggle = ActionBarDrawerToggle(this, binding.drawerLayout, binding.mainToolbar, R.string.open, R.string.close)
+        toggle = ActionBarDrawerToggle(this, binding.drawerLayout, binding.mainToolbar,
+            R.string.open,
+            R.string.close
+        )
         //passing toggle to drawerlayout
         binding.drawerLayout.addDrawerListener(toggle)
         //toggle ready to be used
@@ -58,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, MainViewModelFactory(application)).get(MainViewModel::class.java)
 
         //Setting up adapter to Recycler
-        val adapter = PokemonAdapter()
+        adapter = PokemonAdapter()
         binding.pokemonRecyclerList.adapter = adapter
 
 
@@ -67,6 +72,7 @@ class MainActivity : AppCompatActivity() {
             adapter.submitList(it)
             handleEmptyView(it, binding)
         })
+
 
         viewModel.status.observe(this, Observer {
 
@@ -125,7 +131,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
     private fun openPokemonDetailActivity(pokemon: Pokemon) {
 
         val intent = Intent(this, DetailActivity::class.java)
@@ -134,8 +139,14 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    ////Menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
         menuInflater.inflate(R.menu.options, menu)
+        val search = menu?.findItem(R.id.menu_search)
+        val searchView = search?.actionView as? SearchView
+        searchView?.isSubmitButtonEnabled = true
+        searchView?.setOnQueryTextListener(this)
         return true
     }
 
@@ -147,7 +158,29 @@ class MainActivity : AppCompatActivity() {
 
         return super.onOptionsItemSelected(item)
     }
+    ///Search
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        if (query != null){
+            searchPokemon(query)
+        }
+        return true
+    }
 
+    override fun onQueryTextChange(query: String?): Boolean {
+        if (query != null){
+            searchPokemon(query)
+        }
+        return true
+    }
+
+    private fun searchPokemon(pokemonName: String){
+
+        viewModel.searchPokemon(pokemonName).observe(this, Observer {
+            adapter.submitList(it)
+        })
+
+    }
+//////////
     private fun touchSound(){
 
         val sound = MediaPlayer.create(this, R.raw.sound_effect)

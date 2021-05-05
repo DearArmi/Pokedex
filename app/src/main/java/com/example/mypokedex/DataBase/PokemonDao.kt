@@ -1,5 +1,7 @@
 package com.example.mypokedex.DataBase
 
+import android.graphics.Bitmap
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.mypokedex.Pokemon
 
@@ -12,6 +14,12 @@ interface PokemonDao {
     @Query("SELECT * FROM Pokemon")
     fun getAllPokemon():MutableList<Pokemon>
 
+    @Query("SELECT * FROM Pokemon WHERE name LIKE :pokemonName")
+    fun searchPokemon(pokemonName:String):MutableList<Pokemon>
+
+    @Query("SELECT * FROM Pokemon WHERE name LIKE :pokemonName")
+    fun searchPokemon2(pokemonName:String):LiveData<MutableList<Pokemon>>
+
     @Query("SELECT * FROM Pokemon WHERE number BETWEEN :valueOne AND :valueTwo")
     fun getPokemonByRegion(valueOne:Int, valueTwo:Int):MutableList<Pokemon>
 
@@ -20,5 +28,9 @@ interface PokemonDao {
 
     @Query("DELETE FROM Pokemon WHERE number BETWEEN 1 AND 151")
     fun delete()
+
+    //Use this when you add another column into pokemon table
+    @Query("UPDATE Pokemon SET pokemonPreview = :preview WHERE pokemonPreview = 0")
+    fun editPokemon(preview: Bitmap)
 
 }
