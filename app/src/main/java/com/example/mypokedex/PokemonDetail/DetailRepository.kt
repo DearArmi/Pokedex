@@ -8,7 +8,6 @@ import org.json.JSONObject
 
 class DetailRepository {
 
-    //TODO CHANGE THIS TO RETURN A LIST OF ARRAYS
     suspend fun loadPokemonTypeEffectivenessFromAPI(pokemonTypes: IntArray):MutableList<MutableList<Array<String>>>{
 
         return withContext(Dispatchers.IO){
@@ -32,54 +31,59 @@ class DetailRepository {
         }
     }
 
-
-
-    //TODO create a method for loops
+    //TODO-- include JsonArray in loop method
     private fun parseTypeEffectiveness(pokemonEffectiveness:String):MutableList<Array<String>> {
 
-        //val doubleDamageFrom = arrayOf("","","","","")
-        //val doubleDamageTo = arrayOf("","","","","")
         val doubleDamageFromAndToByTypes = mutableListOf<Array<String>>()
         var position = 0
 
         val typeEffectiveness = JSONObject(pokemonEffectiveness)
         val damageRelation = typeEffectiveness.getJSONObject("damage_relations")
+
+        //Pokemon Type double damage from
         val doubleDamageFromApi = damageRelation.getJSONArray("double_damage_from")
-
         val doubleDamageFrom = getArray(doubleDamageFromApi)
-        /*for (i in 0 until doubleDamageFromApi.length()){
-            val pokemonType = doubleDamageFromApi[i] as JSONObject
-            val type = pokemonType.getString("name")
-
-            doubleDamageFrom[i] = type
-        }*/
         doubleDamageFromAndToByTypes.add(position,doubleDamageFrom)
         position++
-
+        //Pokemon Type double damage to
         val doubleDamageToApi = damageRelation.getJSONArray("double_damage_to")
         val doubleDamageTo = getArray(doubleDamageToApi)
-
-        /*for (i in 0 until doubleDamageToApi.length()){
-            val pokemonType = doubleDamageToApi[i] as JSONObject
-            val type = pokemonType.getString("name")
-
-            doubleDamageTo[i] = type
-        }*/
         doubleDamageFromAndToByTypes.add(position,doubleDamageTo)
         position++
+        //Pokemon Type half damage from
+        val halfDamageFromApi = damageRelation.getJSONArray("half_damage_from")
+        val halfDamageFrom = getArray(halfDamageFromApi)
+        doubleDamageFromAndToByTypes.add(position,halfDamageFrom)
+        position++
+        //Pokemon Type half damage to
+        val halfDamageToApi = damageRelation.getJSONArray("half_damage_to")
+        val halfDamageTo = getArray(halfDamageToApi)
+        doubleDamageFromAndToByTypes.add(position, halfDamageTo)
+        position++
+        //Pokemon Type no damage from
+        val noDamageFromApi = damageRelation.getJSONArray("no_damage_from")
+        val noDamageFrom = getArray(noDamageFromApi)
+        doubleDamageFromAndToByTypes.add(position, noDamageFrom)
+        position++
+        //Pokemon Type no damage to
+        val noDamageToApi = damageRelation.getJSONArray("no_damage_to")
+        val noDamageTo = getArray(noDamageToApi)
+        doubleDamageFromAndToByTypes.add(position, noDamageTo)
 
         return doubleDamageFromAndToByTypes
     }
 
-    private fun getArray(doubleDamageFromApi: JSONArray): Array<String>{
+    private fun getArray(jsonArray: JSONArray): Array<String>{
 
         val effectiveness = arrayOf("","","","","")
 
-        for (i in 0 until doubleDamageFromApi.length()){
-            val pokemonType = doubleDamageFromApi[i] as JSONObject
-            val type = pokemonType.getString("name")
+        if(jsonArray.length() > 0) {
+            for (i in 0 until jsonArray.length()) {
+                val pokemonType = jsonArray[i] as JSONObject
+                val type = pokemonType.getString("name")
 
-            effectiveness[i] = type
+                effectiveness[i] = type
+            }
         }
         return effectiveness
     }

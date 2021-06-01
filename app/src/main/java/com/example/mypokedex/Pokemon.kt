@@ -6,6 +6,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
+//TODO----create types table
 @Entity(tableName = "Pokemon")
 @Parcelize
 data class Pokemon(@PrimaryKey val number: Int,
@@ -20,10 +21,10 @@ data class Pokemon(@PrimaryKey val number: Int,
     val number: Int*/
 
 
-    enum class PokemonType{
+    /*enum class PokemonType{
 
         NORMAL, FIRE, WATER, GRASS, ELECTRIC, PSYCHIC, ICE, DRAGON, DARK, FIGHTING, FLYING,
         POISON,GROUND, ROCK, BUG, GHOST, STEEL
 
-    }
+    }*/
 }

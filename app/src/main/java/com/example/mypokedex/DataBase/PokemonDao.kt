@@ -5,17 +5,27 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.mypokedex.Pokemon
 
+
 @Dao
 interface PokemonDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPokemon(pokemon:Pokemon)
 
+    //Testing
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertPokemonList(list: MutableList<Pokemon>)
+
     @Query("SELECT * FROM Pokemon")
     fun getAllPokemon():MutableList<Pokemon>
 
+    //flow
+    /*@Query("SELECT * FROM Pokemon WHERE name LIKE :pokemonName")
+    fun searchPokemon(pokemonName:String): LiveData<Flow<MutableList<Pokemon>>>*/
+
+    ////TODO--implement this with Dagger
     @Query("SELECT * FROM Pokemon WHERE name LIKE :pokemonName")
-    fun searchPokemon(pokemonName:String):MutableList<Pokemon>
+    fun getPokemonLikeSearch(pokemonName:String):MutableList<Pokemon>
 
     @Query("SELECT * FROM Pokemon WHERE name LIKE :pokemonName")
     fun searchPokemon2(pokemonName:String):LiveData<MutableList<Pokemon>>

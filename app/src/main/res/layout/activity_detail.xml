@@ -54,215 +54,113 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <!--TODO Find a way to use include for stats -->
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            app:layout_anchorGravity="center"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <TextView
-                android:id="@+id/pokemon_hp"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/hp"
-                android:background="@color/hp"
-                style="@style/startText"/>
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/pokemom_speed"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/speed"
-                android:background="@color/speed"
-                style="@style/startText"/>
+                <!--TODO Find a way to use include for stats -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
+                    <TextView
+                        android:id="@+id/pokemon_hp"
+                        style="@style/startText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/hp"
+                        android:text="@string/hp" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/pokemon_attack"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/attack"
-                android:background="@color/attack"
-                style="@style/startText"/>
-
-            <TextView
-                android:id="@+id/pokemon_defense"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/defense"
-                android:background="@color/defense"
-                style="@style/startText"/>
+                    <TextView
+                        android:id="@+id/pokemom_speed"
+                        style="@style/startText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/speed"
+                        android:text="@string/speed" />
 
 
-        </LinearLayout>
+                </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/pokemon_sa"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/sa"
-                android:background="@color/special_attack"
-                style="@style/startText"/>
+                    <TextView
+                        android:id="@+id/pokemon_attack"
+                        style="@style/startText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/attack"
+                        android:text="@string/attack" />
 
-            <TextView
-                android:id="@+id/pokemon_sd"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/sd"
-                android:background="@color/special_defense"
-                style="@style/startText"/>
-
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/startText"
-            android:text="@string/double_damage_from" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/weak1"
-                android:layout_width="32dp"
-                android:layout_height="29dp"
-                tools:src="@drawable/electric" />
-
-            <ImageView
-                android:id="@+id/weak2"
-                android:layout_width="32dp"
-                android:layout_height="29dp"
-                tools:src="@drawable/electric" />
-
-            <ImageView
-                android:id="@+id/weak3"
-                android:layout_width="32dp"
-                android:layout_height="29dp"
-                tools:src="@drawable/electric" />
-
-            <ImageView
-                android:id="@+id/weak4"
-                android:layout_width="32dp"
-                android:layout_height="29dp"
-                tools:src="@drawable/electric" />
-
-            <ImageView
-                android:id="@+id/weak5"
-                android:layout_width="32dp"
-                android:layout_height="29dp"
-                tools:src="@drawable/electric" />
-
-            <ImageView
-                android:id="@+id/weak6"
-                android:layout_width="32dp"
-                android:layout_height="29dp"
-                tools:src="@drawable/electric" />
-
-            <ImageView
-                android:id="@+id/weak7"
-                android:layout_width="32dp"
-                android:layout_height="29dp"
-                tools:src="@drawable/electric" />
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/startText"
-            android:text="@string/double_damage_to" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/strong1"
-                android:layout_width="32dp"
-                android:layout_height="29dp"
-                tools:src="@drawable/electric" />
-
-            <ImageView
-                android:id="@+id/strong2"
-                android:layout_width="32dp"
-                android:layout_height="29dp"
-                tools:src="@drawable/electric" />
-
-            <ImageView
-                android:id="@+id/strong3"
-                android:layout_width="32dp"
-                android:layout_height="29dp"
-                tools:src="@drawable/electric" />
-
-            <ImageView
-                android:id="@+id/strong4"
-                android:layout_width="32dp"
-                android:layout_height="29dp"
-                tools:src="@drawable/electric" />
-
-            <ImageView
-                android:id="@+id/strong5"
-                android:layout_width="32dp"
-                android:layout_height="29dp"
-                tools:src="@drawable/electric" />
-
-            <ImageView
-                android:id="@+id/strong6"
-                android:layout_width="32dp"
-                android:layout_height="29dp"
-                tools:src="@drawable/electric" />
-
-            <ImageView
-                android:id="@+id/strong7"
-                android:layout_width="32dp"
-                android:layout_height="29dp"
-                tools:src="@drawable/electric" />
-
-        </LinearLayout>
+                    <TextView
+                        android:id="@+id/pokemon_defense"
+                        style="@style/startText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/defense"
+                        android:text="@string/defense" />
 
 
-        <!-- <include
-             layout="@layout/type_effectiveness"/> -->
+                </LinearLayout>
 
-    </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/pokemon_sa"
+                        style="@style/startText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/special_attack"
+                        android:text="@string/sa" />
+
+                    <TextView
+                        android:id="@+id/pokemon_sd"
+                        style="@style/startText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/special_defense"
+                        android:text="@string/sd" />
+
+
+                </LinearLayout>
+
+                <include
+                    android:id="@+id/effectiveness_include"
+                    layout="@layout/type_effectiveness" />
+
+                <Button
+                    android:id="@+id/location_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_corners"
+                    android:text="See Locations"
+                    android:textColor="@color/white"
+                    android:layout_margin="16dp"
+                    android:padding="8dp"/>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
 
             android:id="@+id/floating_bt"

@@ -6,11 +6,8 @@
 
     </data>
 
-    <LinearLayout
-        android:id="@+id/este"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    <merge>
+
 
         <TextView
             android:layout_width="match_parent"
@@ -126,6 +123,173 @@
 
         </LinearLayout>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/startText"
+            android:text="@string/half_damage_from" />
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/half_from1"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                tools:src="@drawable/electric" />
+
+            <ImageView
+                android:id="@+id/half_from2"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                tools:src="@drawable/electric" />
+
+            <ImageView
+                android:id="@+id/half_from3"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                tools:src="@drawable/electric" />
+
+            <ImageView
+                android:id="@+id/half_from4"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                tools:src="@drawable/electric" />
+
+            <ImageView
+                android:id="@+id/half_from5"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                tools:src="@drawable/electric" />
+
+            <ImageView
+                android:id="@+id/half_from6"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                tools:src="@drawable/electric" />
+
+            <ImageView
+                android:id="@+id/half_from7"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                tools:src="@drawable/electric" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/startText"
+            android:text="@string/half_damage_to" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/half_to1"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                tools:src="@drawable/electric" />
+
+            <ImageView
+                android:id="@+id/half_to2"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                tools:src="@drawable/electric" />
+
+            <ImageView
+                android:id="@+id/half_to3"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                tools:src="@drawable/electric" />
+
+            <ImageView
+                android:id="@+id/half_to4"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                tools:src="@drawable/electric" />
+
+            <ImageView
+                android:id="@+id/half_to5"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                tools:src="@drawable/electric" />
+
+            <ImageView
+                android:id="@+id/half_to6"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                tools:src="@drawable/electric" />
+
+            <ImageView
+                android:id="@+id/half_to7"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                tools:src="@drawable/electric" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/startText"
+            android:text="@string/no_damage_from" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/no_from1"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                tools:src="@drawable/electric" />
+
+            <ImageView
+                android:id="@+id/no_from2"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                tools:src="@drawable/electric" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/startText"
+            android:text="@string/no_damage_to" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/no_to1"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                tools:src="@drawable/electric" />
+
+            <ImageView
+                android:id="@+id/no_to2"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                tools:src="@drawable/electric" />
+
+        </LinearLayout>
+    </merge>
 </layout>

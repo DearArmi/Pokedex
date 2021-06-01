@@ -26,5 +26,9 @@
     <string name="search">search</string>
     <string name="double_damage_from">Double Damage From: </string>
     <string name="double_damage_to">Double Damage To: </string>
+    <string name="half_damage_from">Half Damage From:</string>
+    <string name="half_damage_to">Half Damage to:</string>
+    <string name="no_damage_from">No Damage From:</string>
+    <string name="no_damage_to">No Damage To:</string>
 
 </resources>

@@ -5,10 +5,7 @@ import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -19,16 +16,14 @@ import com.bumptech.glide.request.target.Target
 import com.example.mypokedex.Pokemon
 import com.example.mypokedex.R
 import com.example.mypokedex.databinding.ActivityDetailBinding
-import com.example.mypokedex.databinding.TypeEffectivenessBinding
-import com.example.mypokedex.databinding.TypeEffectivenessBindingImpl
 
 
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
-    //private lateinit var effectivenessBinding: TypeEffectivenessBinding
+
     private lateinit var viewModel: DetailViewModel
-    private var imageViewsArray = mutableListOf<ImageView>()
+    private var imageViewsList = mutableListOf<ImageView>()
 
     companion object {
         const val POKEMON_KEY = "pokemon"
@@ -37,9 +32,6 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
-
-        //effectivenessBinding = TypeEffectivenessBinding.inflate(layoutInflater)
-        //effectivenessBinding = TypeEffectivenessBinding.inflate(layoutInflater, effectivenessBinding.este, true)
         setContentView(binding.root)
 
         //Getting extras
@@ -54,64 +46,81 @@ class DetailActivity : AppCompatActivity() {
         //Setting up pokemon info
         setPokemonData(pokemon)
 
-        /* TODO with include in layout
-        imageViewsArray.add(effectivenessBinding.weak1)
-        imageViewsArray.add(effectivenessBinding.weak2)
-        imageViewsArray.add(effectivenessBinding.weak3)
-        imageViewsArray.add(effectivenessBinding.weak4)
-        imageViewsArray.add(effectivenessBinding.weak5)
-        imageViewsArray.add(effectivenessBinding.weak6)
-        imageViewsArray.add(effectivenessBinding.weak7)
-        imageViewsArray.add(effectivenessBinding.strong1)
-        imageViewsArray.add(effectivenessBinding.strong2)
-        imageViewsArray.add(effectivenessBinding.strong3)
-        imageViewsArray.add(effectivenessBinding.strong4)
-        imageViewsArray.add(effectivenessBinding.strong5)
-        imageViewsArray.add(effectivenessBinding.strong6)
-        imageViewsArray.add(effectivenessBinding.strong7)*/
+         //TODO with include in layout----LISTOOOOOOOOOOOOOOOOO
+        imageViewsList.add(binding.effectivenessInclude.weak1)
+        imageViewsList.add(binding.effectivenessInclude.weak2)
+        imageViewsList.add(binding.effectivenessInclude.weak3)
+        imageViewsList.add(binding.effectivenessInclude.weak4)
+        imageViewsList.add(binding.effectivenessInclude.weak5)
+        imageViewsList.add(binding.effectivenessInclude.weak6)
+        imageViewsList.add(binding.effectivenessInclude.weak7)
+        imageViewsList.add(binding.effectivenessInclude.strong1)
+        imageViewsList.add(binding.effectivenessInclude.strong2)
+        imageViewsList.add(binding.effectivenessInclude.strong3)
+        imageViewsList.add(binding.effectivenessInclude.strong4)
+        imageViewsList.add(binding.effectivenessInclude.strong5)
+        imageViewsList.add(binding.effectivenessInclude.strong6)
+        imageViewsList.add(binding.effectivenessInclude.strong7)
+        imageViewsList.add(binding.effectivenessInclude.halfFrom1)
+        imageViewsList.add(binding.effectivenessInclude.halfFrom2)
+        imageViewsList.add(binding.effectivenessInclude.halfFrom3)
+        imageViewsList.add(binding.effectivenessInclude.halfFrom4)
+        imageViewsList.add(binding.effectivenessInclude.halfFrom5)
+        imageViewsList.add(binding.effectivenessInclude.halfFrom6)
+        imageViewsList.add(binding.effectivenessInclude.halfFrom7)
+        imageViewsList.add(binding.effectivenessInclude.halfTo1)
+        imageViewsList.add(binding.effectivenessInclude.halfTo2)
+        imageViewsList.add(binding.effectivenessInclude.halfTo3)
+        imageViewsList.add(binding.effectivenessInclude.halfTo4)
+        imageViewsList.add(binding.effectivenessInclude.halfTo5)
+        imageViewsList.add(binding.effectivenessInclude.halfTo6)
+        imageViewsList.add(binding.effectivenessInclude.halfTo7)
+        imageViewsList.add(binding.effectivenessInclude.noFrom1)
+        imageViewsList.add(binding.effectivenessInclude.noFrom2)
+        imageViewsList.add(binding.effectivenessInclude.noTo1)
+        imageViewsList.add(binding.effectivenessInclude.noTo2)
+        
+        
 
-        imageViewsArray.add(binding.weak1)
-        imageViewsArray.add(binding.weak2)
-        imageViewsArray.add(binding.weak3)
-        imageViewsArray.add(binding.weak4)
-        imageViewsArray.add(binding.weak5)
-        imageViewsArray.add(binding.weak6)
-        imageViewsArray.add(binding.weak7)
-        imageViewsArray.add(binding.strong1)
-        imageViewsArray.add(binding.strong2)
-        imageViewsArray.add(binding.strong3)
-        imageViewsArray.add(binding.strong4)
-        imageViewsArray.add(binding.strong5)
-        imageViewsArray.add(binding.strong6)
-        imageViewsArray.add(binding.strong7)
 
         binding.floatingBt.setOnClickListener {
 
             val mediaPlayer = MediaPlayer.create(this, R.raw.sound_effect)
             mediaPlayer.start()
         }
-
+        //TODO---There's a problem here
        viewModel.pokemonEffectivenessList.observe(this, Observer {
-           val doubleDamageFromBigList = it[0]
-           val doubleDamageFromTo = doubleDamageFromBigList[0]
+           val effectivenessBigList = it[0]
+           val doubleDamageFrom = effectivenessBigList[0]
            //var index = 0
            //binding.doubleDamageFrom.text = doubleDamageFromTo[0] + doubleDamageFromTo[1] + doubleDamageFromTo[2] + doubleDamageFromTo[3]
-           setTypeImages(0, doubleDamageFromTo, imageViewsArray)
+           setTypeImages(0, doubleDamageFrom, imageViewsList)
 
-           //val doubleDamageFrom2 = it[0]
-           val doubleDamageFromTo2 = doubleDamageFromBigList[1]
-           //index = 7
-           ///binding.doubleDamageTo.text = doubleDamageFromTo2[0] + doubleDamageFromTo2[1] + doubleDamageFromTo2[2] + doubleDamageFromTo2[3]
-           setTypeImages(7, doubleDamageFromTo2, imageViewsArray)
+           val doubleDamageTo = effectivenessBigList[1]
+           setTypeImages(7, doubleDamageTo, imageViewsList)
+
+           val halfDamageFrom = effectivenessBigList[2]
+           setTypeImages(14, halfDamageFrom, imageViewsList)
+
+           val halfDamageTo = effectivenessBigList[3]
+           setTypeImages(21, halfDamageTo, imageViewsList)
+
+           val noDamageFrom = effectivenessBigList[4]
+           setTypeImages(28, noDamageFrom, imageViewsList)
+
+           val noDamageTo = effectivenessBigList[5]
+           setTypeImages(30, noDamageTo, imageViewsList)
        })
-    }
 
-    private fun setTypeImages(beginIndex:Int, doubleDamageFromTo: Array<String>, imageViewArray:MutableList<ImageView>) {
+
+    }
+    //TODO---There's a problem here
+    private fun setTypeImages(beginIndex:Int, effectivenessArray: Array<String>, imageViewArray:MutableList<ImageView>) {
 
         //var position = 0
 
-        for (i in 0 until doubleDamageFromTo.size){
-            when(doubleDamageFromTo[i]){
+        for (i in 0 until effectivenessArray.size){
+            when(effectivenessArray[i]){
                 "bug" -> imageViewArray[beginIndex+i].setImageResource(R.drawable.bug)
                 "dark" -> imageViewArray[beginIndex+i].setImageResource(R.drawable.dark)
                 "dragon" -> imageViewArray[beginIndex+i].setImageResource(R.drawable.dragon)

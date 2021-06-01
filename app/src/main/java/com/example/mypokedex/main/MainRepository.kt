@@ -11,6 +11,7 @@ import com.example.mypokedex.Api.service
 import com.example.mypokedex.DataBase.PokemonDataBase
 import com.example.mypokedex.Pokemon
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 
@@ -33,11 +34,33 @@ class MainRepository(private val dataBase: PokemonDataBase, private val applicat
         }
     }
 
-    suspend fun searchPokemon(pokemonName:String):MutableList<Pokemon>{
+   /* suspend fun searchPokemon(pokemonName:String): Flow<MutableList<Pokemon>> {
         return withContext(Dispatchers.IO){
 
             dataBase.pokemonDao.searchPokemon(pokemonName)
         }
+    }*/
+
+    //flow
+    /*fun searchPokemon(pokemonName:String):LiveData<Flow<MutableList<Pokemon>>>{
+            return  dataBase.pokemonDao.searchPokemon(pokemonName)
+
+    }*/
+
+    suspend fun getAllPokemon():MutableList<Pokemon>{
+        return withContext(Dispatchers.IO){
+            dataBase.pokemonDao.getAllPokemon()
+        }
+    }
+
+    suspend fun getPokemonLikeSearch(characters:String):MutableList<Pokemon>{
+        var pokemonLikeList = mutableListOf<Pokemon>()
+        return  withContext(Dispatchers.IO){
+
+            pokemonLikeList = dataBase.pokemonDao.getPokemonLikeSearch(characters)
+            pokemonLikeList
+        }
+
     }
 
     fun searchPokemon2(pokemonName:String):LiveData<MutableList<Pokemon>>{

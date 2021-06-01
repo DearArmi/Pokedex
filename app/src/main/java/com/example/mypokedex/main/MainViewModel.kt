@@ -19,22 +19,40 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
 
     private val dataBase = getDataBase(application)
     private val repository = MainRepository(dataBase, application)
+    //Searching lists
+    lateinit var allPokemonList:MutableList<Pokemon>
+    lateinit var tempPokemonList:MutableList<Pokemon>
 
+    //Observers
     private var _pokemonList = MutableLiveData<MutableList<Pokemon>>()
     val pokemonList: LiveData<MutableList<Pokemon>>
         get() = _pokemonList
-
-    /*private var _searchPokemonList = MutableLiveData<Flow<MutableList<Pokemon>>>()
-    val searchPokemonList:LiveData<Flow<MutableList<Pokemon>>>
-        get() = _searchPokemonList*/
 
     private var _status = MutableLiveData<ApiResponseStatus>()
     val status:LiveData<ApiResponseStatus>
         get() = _status
 
-    /*init {
+    init {
         loadPokemon()
-    }*/
+        tempPokemonList = mutableListOf<Pokemon>()
+    }
+
+    private fun loadPokemon() {
+        viewModelScope.launch {
+            allPokemonList = repository.getAllPokemon()
+        }
+    }
+
+    fun addToTempList(pokemon: Pokemon){
+        viewModelScope.launch {
+
+            tempPokemonList.add(pokemon)
+            _status.value = ApiResponseStatus.LOADING
+            _pokemonList.value = tempPokemonList
+            _status.value = ApiResponseStatus.DONE
+        }
+
+    }
 
     /*private fun loadPokemon() {
         viewModelScope.launch {
@@ -65,11 +83,16 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
             repository.delete()
         }
 
+
     }
 
     fun searchPokemon(characters:String):LiveData<MutableList<Pokemon>>{
         return repository.searchPokemon2(characters)
     }
+    //flow
+    /*fun searchPokemon2(characters:String):LiveData<Flow<MutableList<Pokemon>>>{
+        return repository.searchPokemon(characters)
+    }*/
 /*
     fun searchPokemon(characters:String){
         viewModelScope.launch(Dispatchers.Main) {
@@ -77,6 +100,20 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
             _searchPokemonList.value = repository.searchPokemon2(characters)
         }
     }*/
+
+    fun getPokemonLikeSearch(characters:String){
+        viewModelScope.launch(Dispatchers.Main) {
+
+            try {
+                _status.value = ApiResponseStatus.LOADING
+                _pokemonList.value =  repository.getPokemonLikeSearch(characters)
+                _status.value = ApiResponseStatus.DONE
+            }catch (e:UnknownHostException){
+                _status.value = ApiResponseStatus.ERROR
+                //_pokemonList.value?.removeAll(mutableListOf<Pokemon>())
+                Log.d(Tag,"No internet or download incomplete", e)
+            }
+        }}
 
     fun getByRegion(valueOne:Int, valueTwo:Int, totalPokemon:Int){
         viewModelScope.launch(Dispatchers.Main) {

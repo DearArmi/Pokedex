@@ -25,9 +25,10 @@ import com.example.mypokedex.PokemonDetail.DetailActivity
 import com.example.mypokedex.R
 
 import com.example.mypokedex.databinding.ActivityMainBinding
+import java.util.*
 
 
-class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
+class MainActivity : AppCompatActivity()/*, SearchView.OnQueryTextListener*/ {
 
     private lateinit var toggle: ActionBarDrawerToggle //adding button to actionbar
     private lateinit var binding: ActivityMainBinding
@@ -77,9 +78,12 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         viewModel.status.observe(this, Observer {
 
             when(it){
-                ApiResponseStatus.DONE -> {binding.mainProgressbar.visibility = View.GONE }
-                ApiResponseStatus.LOADING -> {binding.mainProgressbar.visibility = View.VISIBLE }
+                ApiResponseStatus.DONE -> {binding.mainProgressbar.visibility = View.GONE
+                                            /*binding.mainToolbar.setEnabled(true)*/}
+                ApiResponseStatus.LOADING -> {binding.mainProgressbar.visibility = View.VISIBLE
+                                                /*binding.mainToolbar.setEnabled(false)*/}
                 ApiResponseStatus.ERROR -> {binding.mainProgressbar.visibility = View.GONE
+                                            /*binding.mainToolbar.setEnabled(true)*/
                                             Toast.makeText(this,"No Internet, Download Incomplete", Toast.LENGTH_SHORT).show() }
             }
 
@@ -146,10 +150,54 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         val search = menu?.findItem(R.id.menu_search)
         val searchView = search?.actionView as? SearchView
         searchView?.isSubmitButtonEnabled = true
-        searchView?.setOnQueryTextListener(this)
+
+        ///Search
+        searchView?.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+
+                /*viewModel.tempPokemonList.clear()
+                val searchText = query!!.toLowerCase(Locale.getDefault())
+
+                if (searchText.isNotEmpty()){
+
+                    viewModel.allPokemonList.forEach {
+
+                        if (it.name.toLowerCase(Locale.getDefault()).contains(searchText)){
+
+                            //viewModel.tempPokemonList.add(it)
+                            viewModel.addToTempList(it)
+
+                        }
+                    }
+                    //viewModel.tempPokemonList.clear()
+                    adapter.notifyDataSetChanged()
+                }*/
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+
+                viewModel.tempPokemonList.clear()
+                val searchText = newText!!.toLowerCase(Locale.getDefault())
+
+                if (searchText.isNotEmpty()){
+
+                    viewModel.allPokemonList.forEach {
+
+                        if (it.name.toLowerCase(Locale.getDefault()).contains(searchText)){
+
+                            viewModel.addToTempList(it)
+
+                        }
+                    }
+                    adapter.notifyDataSetChanged()
+                }
+                return false
+            }
+        })
         return true
     }
-
+    ///Options menu
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         if(toggle.onOptionsItemSelected(item)){
@@ -158,26 +206,23 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
         return super.onOptionsItemSelected(item)
     }
-    ///Search
-    override fun onQueryTextSubmit(query: String?): Boolean {
-        if (query != null){
-            searchPokemon(query)
-        }
-        return true
-    }
 
-    override fun onQueryTextChange(query: String?): Boolean {
-        if (query != null){
-            searchPokemon(query)
-        }
-        return true
-    }
 
     private fun searchPokemon(pokemonName: String){
 
-        viewModel.searchPokemon(pokemonName).observe(this, Observer {
+        //flow
+        /*
+        val query = "%$pokemonName%"
+        viewModel.searchPokemon2(pokemonName).observe(this, Observer { mutableList ->
+
+            mutableList.let {
+                adapter.su
+            }
+            //adapter.submitList(it)
+        })*/
+        /*viewModel.searchPokemon(pokemonName).observe(this, Observer {
             adapter.submitList(it)
-        })
+        })*/
 
     }
 //////////
